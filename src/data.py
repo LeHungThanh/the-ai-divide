@@ -57,13 +57,12 @@ def comparison_sectors(frame: pd.DataFrame) -> pd.DataFrame:
     return frame.loc[frame["nace_r2"].isin(SECTORS)].copy()
 
 
-def barriers(frame: pd.DataFrame, *, size: str = "GE10") -> pd.DataFrame:
+def barriers(frame: pd.DataFrame, *, size: str | None = "GE10") -> pd.DataFrame:
     """Publication-compatible denominator: AI nonusers who had considered use."""
-    return frame.loc[
-        frame["unit"].eq(CONSIDERED)
-        & frame["size_emp"].eq(size)
-        & frame["nace_r2"].eq(OVERALL)
-    ].copy()
+    mask = frame["unit"].eq(CONSIDERED) & frame["nace_r2"].eq(OVERALL)
+    if size is not None:
+        mask &= frame["size_emp"].eq(size)
+    return frame.loc[mask].copy()
 
 
 def record(frame: pd.DataFrame, **filters) -> pd.Series | None:

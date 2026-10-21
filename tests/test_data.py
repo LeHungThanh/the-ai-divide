@@ -37,6 +37,15 @@ class DataTests(unittest.TestCase):
         small = record(sizes, country_code=EU, year=2025, size_emp="10-49")
         self.assertGreater(large.percentage - small.percentage, 0)
 
+    def test_barriers_can_retain_all_size_classes(self):
+        source = load("barrier")
+        selected = barriers(source, size=None)
+        self.assertEqual(set(selected.size_emp.unique()), set(source.size_emp.unique()))
+        self.assertEqual(set(selected.unit.unique()), {CONSIDERED})
+        self.assertEqual(set(selected.nace_r2.unique()), {OVERALL})
+        default = barriers(source)
+        self.assertEqual(set(default.size_emp.unique()), {"GE10"})
+
     def test_unique_keys_and_provenance(self):
         keys = ["country_code", "year", "freq", "size_emp", "nace_r2", "indicator_code", "unit"]
         for name in ("country", "size", "industry", "barrier"):

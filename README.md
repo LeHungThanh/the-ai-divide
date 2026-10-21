@@ -17,7 +17,7 @@ On Windows, activate with `.venv\Scripts\activate`. Then open the URL printed by
 
 ## Deploy
 
-Publish the `codex/ai-divide-streamlit-deploy` branch after the group's own review, then create a Streamlit Community Cloud app with **entry point `app.py`** and **Python 3.12** in Advanced settings. The host installs the root `requirements.txt`. Keep the four CSVs under `data/processed/` in the deployed repository. Other hosts can use `python -m streamlit run app.py --server.address 0.0.0.0 --server.port $PORT` with a supplied `PORT` environment variable. No secrets or API credentials are required.
+Publish the `main` branch after the group's own review, then create a Streamlit Community Cloud app with **entry point `app.py`** and **Python 3.12** in Advanced settings. The host installs the root `requirements.txt`. Keep the four CSVs under `data/processed/` in the deployed repository. Other hosts can use `python -m streamlit run app.py --server.address 0.0.0.0 --server.port $PORT` with a supplied `PORT` environment variable. No secrets or API credentials are required.
 
 ## Verify
 

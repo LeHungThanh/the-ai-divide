@@ -12,11 +12,12 @@ NAMES = {
 header("Member 4 · adoption frictions", "Adoption Barriers",
        "These are reported reasons for non-adoption among enterprises that **considered AI but did not use it**. "
        "Responses can overlap, so percentages do not sum to 100%.")
-all_data = barriers(load("barrier"))
+all_data = barriers(load("barrier"), size=None)
 country = country_picker(all_data, key="barrier_country", default=EU)
 year = st.select_slider("Survey year", options=sorted(all_data.year.unique()), value=int(all_data.year.max()))
-sizes = {"GE10": "All covered enterprises (10+)", "10-49": "Small (10–49)", "50-249": "Medium (50–249)", "GE250": "Large (250+)"}
-size = st.selectbox("Enterprise size", list(sizes), format_func=lambda x: sizes[x])
+size_labels = (all_data[["size_emp", "size_label"]].drop_duplicates()
+               .set_index("size_emp")["size_label"].to_dict())
+size = st.selectbox("Enterprise size", list(size_labels), format_func=lambda x: size_labels[x])
 selected = all_data.loc[all_data.country_code.eq(country) & all_data.year.eq(year) & all_data.size_emp.eq(size)].copy()
 selected["barrier"] = selected.indicator_code.map(NAMES).fillna(selected.indicator_label)
 ranking = selected.dropna(subset=["percentage"]).sort_values("percentage")
