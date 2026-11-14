@@ -5,8 +5,11 @@ from src.ui import inject_style
 st.set_page_config(page_title="The AI Divide", page_icon="◈", layout="wide",
                    initial_sidebar_state="expanded")
 inject_style()
-st.sidebar.markdown("### The AI Divide")
-st.sidebar.caption("Evidence for EU policymakers · 2021–2025")
+st.sidebar.markdown(
+    '<div class="sidebar-meta"><strong>THE AI DIVIDE</strong><br>'
+    'EU enterprise evidence<br><span>2021 · 2023 · 2024 · 2025</span></div>',
+    unsafe_allow_html=True,
+)
 navigation = st.navigation([
     st.Page("pages/1_Overview.py", title="Overview", icon="🏛️", default=True),
     st.Page("pages/2_Country_Divide.py", title="Country Divide", icon="🌍"),

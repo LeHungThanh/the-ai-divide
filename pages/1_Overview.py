@@ -1,7 +1,7 @@
 import streamlit as st
 import plotly.express as px
 from src.data import load, adoption, record, EU
-from src.ui import header, chart, footer, status_note
+from src.ui import header, insight, chart, footer, status_note
 
 header("Policy brief · EU27", "The AI Divide: Who Is Being Left Behind?",
        "**Research question:** Is AI adoption becoming more inclusive across European businesses, or is a digital divide emerging? "
@@ -21,14 +21,20 @@ a.metric(f"EU enterprises using AI · {latest}", f"{eu_now.percentage:.2f}%" if 
 b.metric("Large enterprises", f"{large.percentage:.2f}%" if large is not None else "Unavailable")
 c.metric("Large–small gap", f"{large.percentage-small.percentage:.2f} pp" if large is not None and small is not None else "Unavailable")
 st.caption("EU values are Eurostat's EU27_2020 aggregate. ‘pp’ means percentage points; rates are for enterprises with at least 10 persons employed.")
+if eu_now is not None and eu_before is not None and large is not None and small is not None:
+    insight(f"EU adoption reached **{eu_now.percentage:.2f}%** in {latest}, up **{eu_now.percentage-eu_before.percentage:.2f} percentage points** since {previous}. "
+            f"The large–small gap remains **{large.percentage-small.percentage:.2f} points**.",
+            label="What the latest survey shows")
 trend = country.loc[country.country_code.eq(EU)].dropna(subset=["percentage"]).sort_values("year")
 fig = px.line(trend, x="year", y="percentage", markers=True, title="EU adoption across available survey years",
               labels={"year": "Survey year", "percentage": "Enterprises using AI (%)"},
               hover_data={"percentage": ":.2f", "year": True})
-fig.update_traces(line_color="#007F86", line_width=3, marker_size=9)
-fig.update_traces(text=trend["percentage"].map(lambda value: f"{value:.1f}%"),
-                  textposition="top center", textfont=dict(size=12))
+fig.update_traces(line_color="#007E87", line_width=3, marker_size=9,
+                  mode="lines+markers+text",
+                  text=[f"{value:.1f}%" for value in trend["percentage"]],
+                  textposition="top center", textfont=dict(size=12, color="#17324D"))
 fig.update_xaxes(dtick=1)
+fig.update_yaxes(range=[0, max(22, trend.percentage.max() + 3)])
 chart(fig, key="overview_trend")
 st.markdown("**Read the evidence in sequence:** Country Divide shows where uptake differs; Company Size tests whether scale matters; "
             "Industry Divide compares nonoverlapping activities; Adoption Barriers shows reasons among firms that considered AI but did not use it. "
