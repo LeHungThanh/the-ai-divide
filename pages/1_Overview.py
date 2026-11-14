@@ -26,6 +26,8 @@ fig = px.line(trend, x="year", y="percentage", markers=True, title="EU adoption 
               labels={"year": "Survey year", "percentage": "Enterprises using AI (%)"},
               hover_data={"percentage": ":.2f", "year": True})
 fig.update_traces(line_color="#007F86", line_width=3, marker_size=9)
+fig.update_traces(text=trend["percentage"].map(lambda value: f"{value:.1f}%"),
+                  textposition="top center", textfont=dict(size=12))
 fig.update_xaxes(dtick=1)
 chart(fig, key="overview_trend")
 st.markdown("**Read the evidence in sequence:** Country Divide shows where uptake differs; Company Size tests whether scale matters; "

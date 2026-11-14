@@ -22,6 +22,9 @@ else:
         fig.add_vline(x=float(eu.percentage), line_dash="dash", line_color="#D96C49",
                       annotation_text=f"EU {eu.percentage:.2f}%", annotation_position="top")
     fig.update_layout(coloraxis_showscale=False)
+    fig.update_traces(text=ranked["percentage"].map(lambda value: f"{value:.1f}%"),
+                      textposition="outside", cliponaxis=False,
+                      textfont=dict(size=10, color="#17324D"))
     chart(fig, key="country_rank")
     st.caption("The dashed line is Eurostat's supplied EU27_2020 statistic. Rankings exclude the aggregate; flagged observations remain visible and can be inspected below.")
 choice = country_picker(data.loc[data.country_code.ne(EU)], key="country_trend")
@@ -30,6 +33,8 @@ fig = px.line(trend, x="year", y="percentage", color="country_name", markers=Tru
               title="Selected country versus EU", labels={"year": "Survey year", "percentage": "Enterprises using AI (%)"},
               color_discrete_map={EU: "#D96C49"}, hover_data={"percentage": ":.2f", "observation_status": True})
 fig.update_xaxes(dtick=1)
+fig.update_traces(text=trend["percentage"].map(lambda value: f"{value:.1f}%"),
+                  textposition="top center", textfont=dict(size=11))
 chart(fig, key="country_line")
 row = record(data, country_code=choice, year=year)
 if row is not None and eu is not None:

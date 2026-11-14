@@ -13,7 +13,8 @@ def inject_style() -> None:
     h1, h2, h3 {color: #17324D; letter-spacing: -.025em;}
     div[data-testid="stMetric"] {background: white; border: 1px solid #DCE6EB;
       border-radius: 12px; padding: 1rem;}
-    .block-container {max-width: 1240px; padding-top: 2rem;}
+    .block-container {max-width: 1240px; padding-top: 1.5rem; padding-bottom: 2rem;}
+    [data-testid="stCaptionContainer"] {line-height: 1.35;}
     </style>""", unsafe_allow_html=True)
 
 
@@ -26,7 +27,7 @@ def header(kicker: str, title: str, introduction: str) -> None:
 def chart(fig, *, key: str) -> None:
     fig.update_layout(
         template="plotly_white", font=dict(family="Arial", color=PALETTE["ink"]),
-        margin=dict(l=10, r=10, t=55, b=20),
+        margin=dict(l=18, r=28, t=55, b=28),
         hoverlabel=dict(bgcolor="white"),
         legend_title_text="", height=max(370, min(690, fig.layout.height or 410)),
     )

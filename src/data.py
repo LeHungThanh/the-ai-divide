@@ -1,6 +1,7 @@
 """Load and select Eurostat observations without changing missing values."""
 from pathlib import Path
 import pandas as pd
+import streamlit as st
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data" / "processed"
@@ -19,6 +20,7 @@ SIZES = {"10-49": "Small (10–49)", "50-249": "Medium (50–249)", "GE250": "La
 SECTORS = {"C", "D", "E", "F", "G", "H", "I", "J", "L", "M", "N", "S951"}
 
 
+@st.cache_data(show_spinner=False)
 def load(name: str) -> pd.DataFrame:
     """Return a fresh frame. Missing percentages stay NaN; provenance stays text."""
     if name not in FILES:

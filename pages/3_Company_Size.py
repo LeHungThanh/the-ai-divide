@@ -18,6 +18,8 @@ fig = px.bar(selected.dropna(subset=["percentage"]), x="Size", y="percentage", c
              color_discrete_sequence=["#76B5B4", "#007F86", "#17324D"],
              labels={"percentage": "Enterprises using AI (%)"},
              hover_data={"size_label": True, "observation_status": True, "percentage": ":.2f"})
+fig.update_traces(text=selected.dropna(subset=["percentage"])["percentage"].map(lambda value: f"{value:.1f}%"),
+                  textposition="outside", cliponaxis=False, textfont=dict(size=12))
 chart(fig, key="size_bar")
 small = record(selected, size_emp="10-49")
 large = record(selected, size_emp="GE250")
@@ -30,6 +32,8 @@ fig = px.line(trend, x="year", y="percentage", color="Size", markers=True,
               color_discrete_map={"Small (10–49)": "#76B5B4", "Medium (50–249)": "#007F86", "Large (250+)": "#17324D"},
               hover_data={"percentage": ":.2f", "observation_status": True})
 fig.update_xaxes(dtick=1)
+fig.update_traces(text=trend["percentage"].map(lambda value: f"{value:.1f}%"),
+                  textposition="top center", textfont=dict(size=10))
 chart(fig, key="size_trend")
 if small is not None and large is not None:
     st.markdown(f"For **{small.country_name}** in **{year}**, large enterprises led small enterprises by **{large.percentage-small.percentage:.2f} pp**. "

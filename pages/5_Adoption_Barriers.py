@@ -17,7 +17,10 @@ country = country_picker(all_data, key="barrier_country", default=EU)
 year = st.select_slider("Survey year", options=sorted(all_data.year.unique()), value=int(all_data.year.max()))
 size_labels = (all_data[["size_emp", "size_label"]].drop_duplicates()
                .set_index("size_emp")["size_label"].to_dict())
-size = st.selectbox("Enterprise size", list(size_labels), format_func=lambda x: size_labels[x])
+size_options = list(size_labels)
+default_size_index = size_options.index("GE10") if "GE10" in size_options else 0
+size = st.selectbox("Enterprise size", size_options, index=default_size_index,
+                    format_func=lambda x: size_labels[x])
 selected = all_data.loc[all_data.country_code.eq(country) & all_data.year.eq(year) & all_data.size_emp.eq(size)].copy()
 selected["barrier"] = selected.indicator_code.map(NAMES).fillna(selected.indicator_label)
 ranking = selected.dropna(subset=["percentage"]).sort_values("percentage")
@@ -31,6 +34,8 @@ else:
                  color_discrete_sequence=["#D96C49"],
                  hover_data={"indicator_code": True, "indicator_label": True,
                              "denominator_definition": True, "observation_status": True, "percentage": ":.2f"})
+    fig.update_traces(text=ranking["percentage"].map(lambda value: f"{value:.1f}%"),
+                      textposition="outside", cliponaxis=False, textfont=dict(size=11))
     chart(fig, key="barrier_rank")
     top = ranking.iloc[-1]
     st.markdown(f"The most frequently reported reason in **{top.country_name}** in **{year}** is **{top.barrier.lower()}** "

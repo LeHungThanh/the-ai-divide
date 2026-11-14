@@ -13,8 +13,18 @@ place = all_data.loc[all_data.country_code.eq(country)].copy()
 mapping = (place[["nace_r2", "industry_label"]].drop_duplicates()
            .set_index("nace_r2")["industry_label"].to_dict())
 codes = sorted(mapping)
-selected_codes = st.multiselect("Sectors", codes, default=codes,
-                                format_func=lambda x: f"{x} — {mapping[x]}")
+if "industry_sectors" not in st.session_state:
+    st.session_state.industry_sectors = codes
+with st.expander("Filter sectors", expanded=False):
+    controls = st.columns(2)
+    if controls[0].button("Select all", key="industry_select_all", use_container_width=True):
+        st.session_state.industry_sectors = codes
+        st.rerun()
+    if controls[1].button("Clear all", key="industry_clear_all", use_container_width=True):
+        st.session_state.industry_sectors = []
+        st.rerun()
+    selected_codes = st.multiselect("Sectors", codes, key="industry_sectors",
+                                    format_func=lambda x: f"{x} — {mapping[x]}")
 place = place.loc[place.nace_r2.isin(selected_codes)]
 matrix = place.pivot(index="nace_r2", columns="year", values="percentage").reindex(index=selected_codes)
 if matrix.empty:
