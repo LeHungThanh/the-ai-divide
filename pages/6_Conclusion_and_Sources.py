@@ -33,8 +33,8 @@ with st.container(border=True):
     st.markdown("Survey years are **2021, 2023, 2024 and 2025**; 2022 is absent. Standard adoption rates cover enterprises with at least 10 persons employed in selected activities. "
                 "The source includes quality flags and missing observations; charts omit missing values without replacing them. Industry categories overlap unless the comparison selection is used. "
                 "The 2025 questionnaire added AI generation of pictures, video and sound/audio, so year-to-year changes partly reflect an expanded technology definition.")
-st.warning("The ZIP has processed CSVs and source-observation identifiers, but no original Eurostat JSON-stat files. "
-           "The 2025 EU expertise barrier is 70.31% in the processed snapshot versus 70.89% in the December 2025 publication; the exact revision reason is unconfirmed.")
+st.warning("The repository now includes the raw Eurostat JSON-stat cubes and reproducible preparation scripts. "
+           "The 2025 EU expertise barrier is 70.31% in the June 2026 source snapshot versus 70.89% in the December 2025 publication; the exact revision reason is unconfirmed.")
 st.subheader("Official sources")
 sources_left, sources_right = st.columns(2)
 with sources_left:

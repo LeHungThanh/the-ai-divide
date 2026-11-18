@@ -1,0 +1,353 @@
+{
+  "outputs": {
+    "01_country_adoption.csv": {
+      "rows": 112,
+      "nonmissing": 112,
+      "missing": 0,
+      "duplicate_keys": 0,
+      "countries": [
+        "AT",
+        "BE",
+        "BG",
+        "CY",
+        "CZ",
+        "DE",
+        "DK",
+        "EE",
+        "EL",
+        "ES",
+        "EU27_2020",
+        "FI",
+        "FR",
+        "HR",
+        "HU",
+        "IE",
+        "IT",
+        "LT",
+        "LU",
+        "LV",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SE",
+        "SI",
+        "SK"
+      ],
+      "years": [
+        "2021",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "sizes": [
+        "GE10"
+      ],
+      "industries": [
+        "C10-S951_X_K"
+      ],
+      "units": [
+        "PC_ENT"
+      ],
+      "flags": {
+        "(none)": 109,
+        "b": 3
+      }
+    },
+    "02_company_size.csv": {
+      "rows": 896,
+      "nonmissing": 586,
+      "missing": 310,
+      "duplicate_keys": 0,
+      "countries": [
+        "AT",
+        "BE",
+        "BG",
+        "CY",
+        "CZ",
+        "DE",
+        "DK",
+        "EE",
+        "EL",
+        "ES",
+        "EU27_2020",
+        "FI",
+        "FR",
+        "HR",
+        "HU",
+        "IE",
+        "IT",
+        "LT",
+        "LU",
+        "LV",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SE",
+        "SI",
+        "SK"
+      ],
+      "years": [
+        "2021",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "sizes": [
+        "0-9",
+        "0_1",
+        "10-249",
+        "10-49",
+        "2-9",
+        "50-249",
+        "GE10",
+        "GE250"
+      ],
+      "industries": [
+        "C10-S951_X_K"
+      ],
+      "units": [
+        "PC_ENT"
+      ],
+      "flags": {
+        "(none)": 883,
+        "b": 13
+      }
+    },
+    "03_industry_adoption.csv": {
+      "rows": 5600,
+      "nonmissing": 4796,
+      "missing": 804,
+      "duplicate_keys": 0,
+      "countries": [
+        "AT",
+        "BE",
+        "BG",
+        "CY",
+        "CZ",
+        "DE",
+        "DK",
+        "EE",
+        "EL",
+        "ES",
+        "EU27_2020",
+        "FI",
+        "FR",
+        "HR",
+        "HU",
+        "IE",
+        "IT",
+        "LT",
+        "LU",
+        "LV",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SE",
+        "SI",
+        "SK"
+      ],
+      "years": [
+        "2021",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "sizes": [
+        "GE10"
+      ],
+      "industries": [
+        "C",
+        "C-E",
+        "C-F",
+        "C10-C12",
+        "C10-C18",
+        "C10-S951_X_K",
+        "C13-C15",
+        "C16-C18",
+        "C19",
+        "C19-C23",
+        "C20",
+        "C21",
+        "C22_C23",
+        "C24_C25",
+        "C26",
+        "C26-C33",
+        "C27",
+        "C27_C28",
+        "C28",
+        "C29_C30",
+        "C31-C33",
+        "D",
+        "D35",
+        "D_E",
+        "E",
+        "F",
+        "G",
+        "G45",
+        "G45-S951_X_K",
+        "G46",
+        "G47",
+        "H",
+        "I",
+        "I55",
+        "ICT",
+        "J",
+        "J58-J60",
+        "J61",
+        "J62_J63",
+        "L",
+        "L68",
+        "L_M",
+        "M",
+        "M69-M71",
+        "M72",
+        "M73-M75",
+        "N",
+        "N77-N82_X_N79",
+        "N79",
+        "S951"
+      ],
+      "units": [
+        "PC_ENT"
+      ],
+      "flags": {
+        "(none)": 4721,
+        "u": 693,
+        "|C": 84,
+        "b": 101,
+        "bu": 1
+      }
+    },
+    "04_ai_adoption_barriers.csv": {
+      "rows": 28672,
+      "nonmissing": 14080,
+      "missing": 14592,
+      "duplicate_keys": 0,
+      "countries": [
+        "AT",
+        "BE",
+        "BG",
+        "CY",
+        "CZ",
+        "DE",
+        "DK",
+        "EE",
+        "EL",
+        "ES",
+        "EU27_2020",
+        "FI",
+        "FR",
+        "HR",
+        "HU",
+        "IE",
+        "IT",
+        "LT",
+        "LU",
+        "LV",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SE",
+        "SI",
+        "SK"
+      ],
+      "years": [
+        "2021",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "sizes": [
+        "0-9",
+        "0_1",
+        "10-249",
+        "10-49",
+        "2-9",
+        "50-249",
+        "GE10",
+        "GE250"
+      ],
+      "industries": [
+        "C10-S951_X_K"
+      ],
+      "units": [
+        "PC_ENT",
+        "PC_ENT_AI_EC",
+        "PC_ENT_AI_TX",
+        "PC_ENT_IUSE"
+      ],
+      "flags": {
+        "(none)": 28228,
+        "u": 284,
+        "b": 160
+      }
+    }
+  },
+  "references": [
+    {
+      "country": "EU27_2020",
+      "size": "GE10",
+      "indicator": "E_AI_TANY",
+      "unit": "PC_ENT",
+      "actual": 19.95,
+      "expected": 19.95,
+      "passed": true,
+      "result": "PASS"
+    },
+    {
+      "country": "DK",
+      "size": "GE10",
+      "indicator": "E_AI_TANY",
+      "unit": "PC_ENT",
+      "actual": 42.03,
+      "expected": 42.03,
+      "passed": true,
+      "result": "PASS"
+    },
+    {
+      "country": "RO",
+      "size": "GE10",
+      "indicator": "E_AI_TANY",
+      "unit": "PC_ENT",
+      "actual": 5.21,
+      "expected": 5.21,
+      "passed": true,
+      "result": "PASS"
+    },
+    {
+      "country": "EU27_2020",
+      "size": "GE250",
+      "indicator": "E_AI_TANY",
+      "unit": "PC_ENT",
+      "actual": 55.03,
+      "expected": 55.03,
+      "passed": true,
+      "result": "PASS"
+    },
+    {
+      "country": "EU27_2020",
+      "size": "GE10",
+      "indicator": "E_AI_BLE",
+      "unit": "PC_ENT_AI_EC",
+      "actual": 70.31,
+      "expected": 70.89,
+      "passed": false,
+      "result": "KNOWN SOURCE-VINTAGE DIFFERENCE"
+    }
+  ],
+  "integrity_errors": [],
+  "targeted_probe": 70.31,
+  "warnings": [
+    "Documented publication-vintage difference: Eurostat article 70.89 vs June 2026 cube 70.31 for EU27_2020/2025/GE10/E_AI_BLE/PC_ENT_AI_EC; exact revision reason unconfirmed."
+  ],
+  "errors": [],
+  "result": "PASS_WITH_DOCUMENTED_SOURCE_VINTAGE_DIFFERENCE"
+}

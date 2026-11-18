@@ -33,7 +33,9 @@ fig.update_traces(line_color="#007E87", line_width=3, marker_size=9,
                   mode="lines+markers+text",
                   text=[f"{value:.1f}%" for value in trend["percentage"]],
                   textposition="top center", textfont=dict(size=12, color="#17324D"))
-fig.update_xaxes(dtick=1)
+observed_years = sorted(trend["year"].dropna().unique())
+fig.update_xaxes(tickmode="array", tickvals=observed_years,
+                 ticktext=[str(year) for year in observed_years])
 fig.update_yaxes(range=[0, max(22, trend.percentage.max() + 3)])
 chart(fig, key="overview_trend")
 st.markdown("**Read the evidence in sequence:** Country Divide shows where uptake differs; Company Size tests whether scale matters; "

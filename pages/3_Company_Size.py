@@ -45,7 +45,9 @@ fig = px.line(trend, x="year", y="percentage", color="Size", markers=True,
               title="Size-class trend", labels={"year": "Survey year", "percentage": "Enterprises using AI (%)"},
               color_discrete_map={"Small (10–49)": "#659B9D", "Medium (50–249)": "#007E87", "Large (250+)": "#17324D"},
               hover_data={"percentage": ":.2f", "observation_status": True})
-fig.update_xaxes(dtick=1)
+observed_years = sorted(trend["year"].dropna().unique())
+fig.update_xaxes(tickmode="array", tickvals=observed_years,
+                 ticktext=[str(year) for year in observed_years])
 for series in fig.data:
     is_large = series.name == "Large (250+)"
     is_small = series.name == "Small (10–49)"

@@ -42,7 +42,9 @@ fig = px.line(trend, x="year", y="percentage", color="Series", markers=True,
               title="Selected country versus EU", labels={"year": "Survey year", "percentage": "Enterprises using AI (%)"},
               color_discrete_map={"EU27 benchmark": "#B65F3D", str(row.country_name) if row is not None else "": "#007E87"},
               hover_data={"percentage": ":.2f", "observation_status": True})
-fig.update_xaxes(dtick=1)
+observed_years = sorted(trend["year"].dropna().unique())
+fig.update_xaxes(tickmode="array", tickvals=observed_years,
+                 ticktext=[str(year) for year in observed_years])
 for series in fig.data:
     benchmark = series.name == "EU27 benchmark"
     series.update(mode="lines+markers+text", line_width=3,

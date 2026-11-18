@@ -64,6 +64,7 @@ def inject_style() -> None:
     .source-footer {display:flex;flex-wrap:wrap;gap:.35rem 1.4rem;border-top:1px solid #CFDCE3;
       margin-top:1.4rem;padding-top:.9rem;color:#52677A;font-size:.78rem;}
     .source-footer strong {color:#17324D;}
+    .source-footer a {color:#17324D;text-decoration:underline;text-underline-offset:2px;}
     [data-testid="stCaptionContainer"] {line-height:1.35;color:#52677A;}
     [data-testid="stWidgetLabel"] {font-weight:650;color:#17324D;}
     .stSelectbox [data-baseweb="select"] > div,
@@ -147,7 +148,7 @@ def trace(row: pd.Series | None, title: str = "Source trace for a displayed stat
                    for field in fields}
         st.dataframe(pd.DataFrame(details.items(), columns=["Field", "Source value"]),
                      hide_index=True, width="stretch")
-        st.caption("The ZIP supplies this observation index and source hash, but contains no raw Eurostat cube for independent cell-level verification.")
+        st.caption("The repository bundles the raw Eurostat JSON-stat cube; the file path, SHA-256 and observation index above identify the exact source cell for independent verification.")
 
 
 def status_note(frame: pd.DataFrame) -> None:
@@ -162,9 +163,12 @@ def status_note(frame: pd.DataFrame) -> None:
 
 def footer() -> None:
     st.markdown(
-        '<div class="source-footer"><span><strong>Source:</strong> Eurostat isoc_eb_ai / isoc_eb_ain2</span>'
+        '<div class="source-footer"><span><strong>Sources:</strong> '
+        '<a href="https://ec.europa.eu/eurostat/databrowser/view/isoc_eb_ai/default/table?lang=en" target="_blank" rel="noopener">Eurostat isoc_eb_ai</a> / '
+        '<a href="https://ec.europa.eu/eurostat/databrowser/view/isoc_eb_ain2/default/table?lang=en" target="_blank" rel="noopener">isoc_eb_ain2</a></span>'
         '<span><strong>Unit:</strong> percentages of the stated denominator</span>'
-        '<span><strong>Source snapshot:</strong> 15 June 2026</span></div>',
+        '<span><strong>Eurostat dataset updated:</strong> 15 June 2026</span>'
+        '<span><strong>Source files retrieved:</strong> 21 October 2026</span></div>',
         unsafe_allow_html=True,
     )
 
