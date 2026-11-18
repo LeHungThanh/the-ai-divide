@@ -115,7 +115,7 @@ def insight(message: str, *, label: str = "Key finding") -> None:
     )
 
 
-def chart(fig, *, key: str) -> None:
+def chart(fig, *, key: str, transition_ms: int = 240) -> None:
     fig.update_layout(
         template="plotly_white", paper_bgcolor="#FFFFFF", plot_bgcolor="#FFFFFF",
         font=dict(family="Arial, sans-serif", color=PALETTE["ink"], size=12),
@@ -123,7 +123,7 @@ def chart(fig, *, key: str) -> None:
         margin=dict(l=15, r=50, t=55, b=35),
         hoverlabel=dict(bgcolor="white", font_color=PALETTE["ink"]),
         legend_title_text="", height=max(340, min(710, fig.layout.height or 390)),
-        transition={"duration": 240, "easing": "cubic-in-out"},
+        transition={"duration": max(0, transition_ms), "easing": "cubic-in-out"},
     )
     fig.update_xaxes(showline=True, linecolor="#AFC3CC", gridcolor="#E7EDF0",
                      zeroline=False, tickfont_color=PALETTE["muted"])
