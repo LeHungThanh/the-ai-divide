@@ -17,10 +17,15 @@ def _emphasis(value: str) -> str:
 def inject_style() -> None:
     st.markdown("""<style>
     :root {--ink:#17324D;--navy:#102B45;--teal:#007E87;--muted:#52677A;}
+    @keyframes motion-fade-up {
+      from {opacity:0;transform:translateY(8px)}
+      to {opacity:1;transform:translateY(0)}
+    }
     .stApp {background:#F3F6F8;color:var(--ink);}
     .block-container {max-width:1220px;padding-top:1.1rem;padding-bottom:2.5rem;}
     [data-testid="stSidebar"] {background:#102B45;border-right:1px solid #25455D;}
     [data-testid="stSidebar"] * {color:#E6F0F2;}
+    [data-testid="stSidebar"] a {transition:background-color 160ms ease,color 160ms ease;}
     [data-testid="stSidebar"] a:hover {background:#22465B;}
     [data-testid="stSidebar"] [aria-current="page"] {background:#28566A;}
     [data-testid="stSidebar"] [data-testid="stSidebarNav"]::before {
@@ -43,7 +48,10 @@ def inject_style() -> None:
     h2,h3 {color:var(--ink);letter-spacing:-.02em;}
     div[data-testid="stMetric"] {background:#FFFFFF;border:1px solid #D7E2E8;
       border-top:4px solid #007E87;border-radius:12px;padding:1rem 1.1rem;
-      box-shadow:0 6px 18px rgba(16,43,69,.045);min-height:126px;}
+      box-shadow:0 6px 18px rgba(16,43,69,.045);min-height:126px;
+      transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease;}
+    div[data-testid="stMetric"]:hover {transform:translateY(-2px);
+      box-shadow:0 10px 24px rgba(16,43,69,.11);border-color:#AFC8D0;}
     div[data-testid="stMetric"] [data-testid="stMetricLabel"] {color:#52677A;font-size:.85rem;}
     div[data-testid="stMetric"] [data-testid="stMetricValue"] {color:#102B45;font-weight:750;}
     div[data-testid="stVerticalBlockBorderWrapper"] > div {border-color:#D7E2E8;
@@ -58,13 +66,43 @@ def inject_style() -> None:
     .source-footer strong {color:#17324D;}
     [data-testid="stCaptionContainer"] {line-height:1.35;color:#52677A;}
     [data-testid="stWidgetLabel"] {font-weight:650;color:#17324D;}
+    .stSelectbox [data-baseweb="select"] > div,
+    .stMultiSelect [data-baseweb="select"] > div,
+    .stButton > button {transition:border-color 160ms ease,box-shadow 160ms ease,background-color 160ms ease;}
+    .stSelectbox [data-baseweb="select"]:hover > div,
+    .stMultiSelect [data-baseweb="select"]:hover > div {border-color:#73AEB1;}
+    .stSelectbox [data-baseweb="select"]:focus-within > div,
+    .stMultiSelect [data-baseweb="select"]:focus-within > div {
+      border-color:#007E87;box-shadow:0 0 0 2px rgba(0,126,135,.16);}
+    .stButton > button:hover {border-color:#73AEB1;color:#006F79;}
+    .stButton > button:focus-visible {outline:3px solid rgba(0,126,135,.45);outline-offset:2px;}
+    @media (prefers-reduced-motion: no-preference) {
+      .page-hero.motion-entry {animation:motion-fade-up 320ms cubic-bezier(.2,.7,.2,1) backwards;}
+      body:has(.page-hero.motion-entry) .insight,
+      body:has(.page-hero.motion-entry) h2,
+      body:has(.page-hero.motion-entry) h3,
+      body:has(.page-hero.motion-entry) [data-testid="stVerticalBlockBorderWrapper"] {
+        animation:motion-fade-up 340ms cubic-bezier(.2,.7,.2,1) 45ms backwards;
+      }
+      body:has(.page-hero.motion-entry) [data-testid="stMetric"] {
+        animation:motion-fade-up 320ms cubic-bezier(.2,.7,.2,1) backwards;
+      }
+      body:has(.page-hero.motion-entry) [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > [data-testid="stColumn"]:nth-child(1) [data-testid="stMetric"] {animation-delay:45ms;}
+      body:has(.page-hero.motion-entry) [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > [data-testid="stColumn"]:nth-child(2) [data-testid="stMetric"] {animation-delay:105ms;}
+      body:has(.page-hero.motion-entry) [data-testid="stHorizontalBlock"]:has([data-testid="stMetric"]) > [data-testid="stColumn"]:nth-child(3) [data-testid="stMetric"] {animation-delay:165ms;}
+      body:has(.page-hero.motion-entry) [data-testid="stVerticalBlockBorderWrapper"] {animation-delay:90ms;}
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *,*::before,*::after {scroll-behavior:auto !important;animation:none !important;transition:none !important;}
+    }
     @media(max-width:800px) {.page-hero{padding:1.1rem}.page-hero h1{font-size:1.7rem}}
     </style>""", unsafe_allow_html=True)
 
 
 def header(kicker: str, title: str, introduction: str) -> None:
+    motion_class = " motion-entry" if st.session_state.get("_motion_page_entry", False) else ""
     st.markdown(
-        f'<section class="page-hero"><div class="eyebrow">{escape(kicker)}</div>'
+        f'<section class="page-hero{motion_class}"><div class="eyebrow">{escape(kicker)}</div>'
         f'<h1>{escape(title)}</h1><p>{_emphasis(introduction)}</p></section>',
         unsafe_allow_html=True,
     )
@@ -85,6 +123,7 @@ def chart(fig, *, key: str) -> None:
         margin=dict(l=15, r=50, t=55, b=35),
         hoverlabel=dict(bgcolor="white", font_color=PALETTE["ink"]),
         legend_title_text="", height=max(340, min(710, fig.layout.height or 390)),
+        transition={"duration": 240, "easing": "cubic-in-out"},
     )
     fig.update_xaxes(showline=True, linecolor="#AFC3CC", gridcolor="#E7EDF0",
                      zeroline=False, tickfont_color=PALETTE["muted"])
