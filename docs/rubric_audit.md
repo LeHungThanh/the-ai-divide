@@ -1,6 +1,6 @@
 # Assignment 3 Part 2 — 30-check audit
 
-Rubric source: the assignment brief supplied in the project conversation (Part 2, 30 binary checks). Reviewed against local branch `codex/part2-requirements` on 18 November 2026. PASS means evidence exists in the current local candidate; UNVERIFIED means an external deployment/submission state or genuine teammate evidence is still required. No criterion is inferred from a documentation claim alone when a test or app check was available.
+Rubric source: the assignment brief supplied in the project conversation (Part 2, 30 binary checks). Reviewed against `codex/part2-requirements` and the published `origin/main` on 19 November 2026. PASS means evidence exists in the published project; UNVERIFIED means an external performance threshold or genuine teammate evidence is still required. No criterion is inferred from a documentation claim alone when a test or app check was available.
 
 | # | Status | Evidence and assessment | Remaining action |
 |---:|---|---|---|
@@ -22,7 +22,7 @@ Rubric source: the assignment brief supplied in the project conversation (Part 2
 | 16 | PASS | Axes state survey year and percentage units; series legends identify country/size. Direct labels and page explanations retain group definitions. | — |
 | 17 | PASS | Direct data labels appear on charts and heatmap tiles; tabular comparison values are also shown. Screenshots are 1366×768. | — |
 | 18 | PASS | Protanopia/deuteranopia previews were generated for all six pages using the documented Machado model and visually inspected. Values, positions, category names and line patterns preserve meaning. Evidence: `docs/accessibility_review.md` and `review/accessibility/`. | — |
-| 19 | UNVERIFIED | Local fresh-process startup was 1.154 s and warm `/` response 0.005 s. Public Community Cloud cold start could not be measured from a known sleeping state; the public check showed a loading screen before render, and Cloud controls sleep/wake. See `docs/performance_review.md`. | Needs a controlled public cold-start timing. Do not claim under five seconds from local timing. |
+| 19 | UNVERIFIED | Local fresh-process startup was 1.154 s and warm `/` response 0.005 s. Public Cloud was confirmed asleep; after requesting wake it was still waking at 10 s and rendered by the next 15 s check. This was manually sampled, not a controlled exact timing. See `docs/performance_review.md`. | Needs a controlled public cold-start timing. Do not claim under five seconds from local timing. |
 | 20 | PASS | Overview opens with Eurostat's EU27 adoption rate, its latest change and the large/small gap—values supported by processed data and raw trace. | — |
 | 21 | PASS | Real local browser interaction changed the country-year finding in 638 ms and company-size KPI in 557 ms; AppTest also exercised year/country and barrier filters. See `docs/performance_review.md`. | — |
 | 22 | PASS | Clearing all industry sectors displays “Select at least one sector to display the heatmap” without an exception; tested in AppTest and the browser. | — |
@@ -30,11 +30,11 @@ Rubric source: the assignment brief supplied in the project conversation (Part 2
 | 24 | PASS | Every page footer displays the Eurostat source, dataset update date (15 June 2026) and source-file retrieval date (21 October 2026); all six pages are checked in AppTest. | — |
 | 25 | PASS | `data/raw/` holds both raw source cubes and the manifest; `data/processed/` holds the four app CSVs. `processed.zip` is excluded as a duplicate. | — |
 | 26 | PASS | `docs/data_dictionary.md` covers purpose, source/API URL, reuse evidence, fields/units, key, geography/time, latest 2025 examples and transformations for every output. | — |
-| 27 | UNVERIFIED | Candidate commit will be checked locally and the app runs from this checkout, but the changes remain on an unpushed feature branch by instruction. | After review, publish the branch/commit and submit the exact resolvable commit hash. |
+| 27 | PASS | Published commit `7c9ea53e9a0e1bec41b90cc293dfeeddc19850f5` is the fast-forwarded `origin/main`; the remote tree contains the required app, six pages, source files, documentation and four processed CSVs. The existing public Streamlit app rendered the updated overview and its six-page navigation after waking. | Submit the exact published commit hash. |
 | 28 | UNVERIFIED | `docs/ai_provenance_matrix.md` has a pending row for each member; no member-specific tools, prompts, uses or checks were invented. | Each of four members must supply and confirm their actual provenance and a falsifiable verification check. |
 | 29 | PASS | `docs/ai_usage.md` contains the project Data and AI disclosure statement and links the pending team matrix. | — |
 | 30 | PASS | Bundled source cubes regenerate all four CSVs with the exact existing SHA-256 values; `scripts/prepare_data.py`, `scripts/validate_data.py` and `tests/test_reproducibility.py` verify the pipeline. | — |
 
 ## Result
 
-**27 PASS · 0 FAIL · 3 UNVERIFIED.** The remaining uncertainty is the public cold-start threshold, the final published commit, and genuine AI-use records from all four members. The current barrier default remains `GE10`; all processed CSV hashes are unchanged.
+**28 PASS · 0 FAIL · 2 UNVERIFIED.** Remaining tasks are to establish the public cold-start threshold with a controlled timing and obtain genuine AI-use records from all four members. The published barrier default remains `GE10`; all processed CSV hashes are unchanged. The provenance matrix remains a pending template and does not fabricate member records.
