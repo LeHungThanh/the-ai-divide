@@ -4,7 +4,7 @@ import streamlit as st
 from src.data import load, adoption, record, EU, SIZES
 from src.ui import header, insight, chart, country_picker, footer, trace, status_note
 
-header("Member 2 · enterprise scale", "Company Size",
+header("Yixin Huang", "Company Size",
        "Small, medium and large businesses face different capacity constraints. Compare their adoption rates within the same country and year; subtracting rates gives a percentage-point gap.")
 all_data = adoption(load("size"), size=None)
 country_col, year_col = st.columns([1.6, 1])

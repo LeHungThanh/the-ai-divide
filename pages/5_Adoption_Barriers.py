@@ -113,7 +113,7 @@ def _display_number(value, suffix: str = "%") -> str:
     return "—" if pd.isna(value) else f"{value:.2f}{suffix}"
 
 
-header("Member 4 · adoption frictions", "Adoption Barriers",
+header("Le Hung Thanh", "Adoption Barriers",
        "These are reported reasons for non-adoption among enterprises that **considered AI but did not use it**. "
        "Responses can overlap, so percentages do not sum to 100%.")
 all_data = barriers(load("barrier"), size=None)

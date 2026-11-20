@@ -6,6 +6,8 @@
 
 The six-page Streamlit dashboard presents the question and evidence for that policy decision. It is arguable: adoption can rise overall while country, size and industry gaps persist, so the same descriptive data can support different assessments of inclusion.
 
+The assigned page workstreams are Country Divide (Mehul Joshi), Company Size (Yixin Huang), Industry Divide (Ashwinlingesh Sangeetha Ravichand) and Adoption Barriers (Le Hung Thanh). These assignments do not establish individual development or AI-use histories; see [member contributions](docs/member_contributions.md) and the [AI provenance matrix](docs/ai_provenance_matrix.md) for the evidence and open confirmations.
+
 ## Run locally
 
 From this repository root:

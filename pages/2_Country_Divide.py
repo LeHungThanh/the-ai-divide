@@ -3,7 +3,7 @@ import plotly.express as px
 from src.data import load, adoption, record, EU
 from src.ui import header, insight, chart, country_picker, footer, trace, status_note
 
-header("Member 1 · geography", "Country Divide",
+header("Mehul Joshi", "Country Divide",
        "Compare adoption across the 27 EU countries against Eurostat's EU aggregate. A country can improve over time while the distance to leading countries remains large.")
 data = adoption(load("country"))
 year_col, country_col = st.columns([1, 1.6])

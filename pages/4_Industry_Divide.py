@@ -4,7 +4,7 @@ import streamlit as st
 from src.data import load, adoption, comparison_sectors, record, EU
 from src.ui import header, insight, chart, country_picker, footer, trace, status_note
 
-header("Member 3 · economic activity", "Industry Divide",
+header("Ashwinlingesh Sangeetha Ravichand", "Industry Divide",
        "AI uptake varies by economic activity. The comparison uses distinct NACE sections plus the covered repair group S951, so broader aggregates and their components are not counted together.")
 all_data = comparison_sectors(adoption(load("industry"), sector=None))
 country_col, year_col = st.columns([1.6, 1])

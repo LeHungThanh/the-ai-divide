@@ -96,7 +96,11 @@ def inject_style() -> None:
     @media (prefers-reduced-motion: reduce) {
       *,*::before,*::after {scroll-behavior:auto !important;animation:none !important;transition:none !important;}
     }
-    @media(max-width:800px) {.page-hero{padding:1.1rem}.page-hero h1{font-size:1.7rem}}
+    @media(max-width:800px) {
+      .page-hero{padding:1.1rem}
+      .page-hero h1{font-size:1.7rem}
+      .page-hero .eyebrow{font-size:.7rem;letter-spacing:.1em;line-height:1.4;overflow-wrap:break-word}
+    }
     </style>""", unsafe_allow_html=True)
 
 

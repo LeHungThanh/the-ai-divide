@@ -18,6 +18,21 @@ PAGES = [
 
 
 class PageSmokeTests(unittest.TestCase):
+    def test_member_page_headers_show_assigned_full_names(self):
+        assignments = {
+            PAGES[1]: "Mehul Joshi",
+            PAGES[2]: "Yixin Huang",
+            PAGES[3]: "Ashwinlingesh Sangeetha Ravichand",
+            PAGES[4]: "Le Hung Thanh",
+        }
+        for page_path, name in assignments.items():
+            with self.subTest(page=page_path):
+                app = AppTest.from_file(str(ROOT / page_path), default_timeout=60).run()
+                self.assertFalse(app.exception)
+                hero = next(item.value for item in app.markdown if 'class="page-hero' in item.value)
+                self.assertIn(name, hero)
+                self.assertNotIn("Member ", hero)
+
     def test_all_six_pages_render_without_streamlit_exceptions(self):
         for page_path in PAGES:
             with self.subTest(page=page_path):
