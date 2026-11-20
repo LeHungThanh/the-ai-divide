@@ -1,43 +1,16 @@
 # Assignment 3 Part 2 — Team AI Provenance
 
-## Project use of Codex
+## Record format
 
-The project used OpenAI Codex to assist with Streamlit development, chart design, data preparation, documentation and automated tests. The model version was not recorded. The entries below describe the assigned work, the resulting features and how to check them. A specific Codex request is documented for Adoption Barriers. Individual AI sessions and manual checks are otherwise undocumented.
+The group used OpenAI Codex for Streamlit development, chart design, data-selection logic, documentation and automated tests. The model version was not recorded. Each member supplied the substantive record below. The request text is a reconstructed summary rather than a verbatim chat transcript; it is labelled accordingly. Each verification states a check that could have failed.
 
-The project record reports 15 passing tests on 19 November 2026. Regenerating the processed CSVs reproduced their committed SHA-256 hashes. Source validation passed with a documented warning about the Eurostat publication vintage. [Data validation script](../scripts/validate_data.py)
+| Member | Artefact | AI tool/model | What was asked *(reconstructed)* | What came back | Verification that could fail | Result/outcome |
+|---|---|---|---|---|---|---|
+| Mehul Joshi | [`pages/2_Country_Divide.py`](../pages/2_Country_Divide.py) | Codex (model version not recorded) | Build a Streamlit country-comparison page using the Eurostat country dataset, with survey-year and Member-State selectors, a 27-country ranking against Eurostat's supplied `EU27_2020` benchmark, a selected-country-versus-EU trend, preserved missing values, and observation/quality-source detail. | Streamlit and Plotly code for year/country controls, a country ranking with EU benchmark line, a country-versus-EU trend, insight text, and source trace. | Select 2024 and compare every plotted country value and the EU line with the matching CSV rows. Fail if a country is missing, a value differs, the EU benchmark is recalculated from countries, or missing observations appear as zero. | Implemented; README documents the workflow. |
+| Yixin Huang | [`pages/3_Company_Size.py`](../pages/3_Company_Size.py) | Codex (model version not recorded) | Create a company-size page comparing small (10–49), medium (50–249), and large (250+) enterprises within the same country and year. Add country/year filters, a large-minus-small percentage-point metric, a size-class trend, non-overlapping classes only, and preserved missing data. | Streamlit/Plotly code for filters, a three-class chart and trend, percentage-point gap, explanatory notes, and source trace. | For Denmark 2025, recompute `GE250 - 10-49` from the source CSV and compare it with the displayed metric. Fail if the sign or value differs, `GE10` or `10-249` enters the three-class chart, or missing values are imputed. | Implemented; README documents the workflow. |
+| Ashwinlingesh Sangeetha Ravichand | [`pages/4_Industry_Divide.py`](../pages/4_Industry_Divide.py) | Codex (model version not recorded) | Build an industry-comparison page with country/year selectors, a sector filter with Select all/Clear all controls, a heatmap over available years, a selected-year ranking, mutually exclusive NACE activity groups, and an explanatory empty state when no sectors are selected. | Streamlit/Plotly code for sector selection, a heatmap, ranking, top-sector insight, and empty-state message. | Clear all sectors and confirm the explanatory state appears. Inspect `comparison_sectors` and displayed codes. Fail if overlapping aggregates and components are included together or missing heatmap cells are filled with zero. | Implemented; README documents the workflow. |
+| Le Hung Thanh | [`pages/5_Adoption_Barriers.py`](../pages/5_Adoption_Barriers.py) | Codex (model version not recorded) | Create an adoption-barriers page using only `PC_ENT_AI_EC`: enterprises that considered AI but did not adopt it. Add country/year/size filters, ranked barriers, small-versus-large and country-versus-supplied-EU27 comparisons, labelled denominator and percentage-point calculations, preserved missing values, and an explanation that responses can overlap. | Streamlit/Plotly code for barrier rankings, size and country/EU comparisons, comparison tables, methodology notes, quality flags, and source-trace expanders. | Trace selected rows to the source and confirm `PC_ENT_AI_EC` with matching year, activity, and size. Recalculate one small/large and one country/EU gap. Fail if the denominator or subtraction direction is wrong, or if missing values are inferred. | Implemented; README documents the denominator and comparison workflow. |
 
-## Mehul Joshi — Country Divide
+## Shared verification evidence
 
-**Scope.** Rank EU Member States by AI adoption for the selected survey year and compare the selected country’s trend with Eurostat’s official EU27 series.
-
-**Outcome.** A horizontal Plotly bar chart ranks countries and uses the supplied `EU27_2020` observation as a reference line. A second chart plots the focus country and EU27 over time. The charts omit unavailable rates and show percentages for available observations. [Page](../pages/2_Country_Divide.py) · [CSV](../data/processed/01_country_adoption.csv)
-
-**Verification.** Project smoke tests exercise the year and country selectors. To check the chart against the source, match a plotted rate to the CSV by country and year, then match the reference line to the EU27 observation for that year. [Smoke tests](../tests/test_page_smoke.py)
-
-## Yixin Huang — Company Size
-
-**Scope.** Compare AI adoption by country and survey year across the 10–49, 50–249 and 250+ employee categories. Calculate the large-minus-small gap in percentage points.
-
-**Outcome.** The page shows rates for the three disjoint size classes, a gap metric for the selected year and historical adoption rates for each class. The gap metric displays “Unavailable” when either source rate is missing. [Page](../pages/3_Company_Size.py) · [CSV](../data/processed/02_company_size.csv)
-
-**Verification.** Project smoke tests check that changing the country updates the gap. To check the calculation, subtract the 10–49 rate from the 250+ rate for the same country and year, then compare the value and sign with the dashboard. [Smoke tests](../tests/test_page_smoke.py)
-
-## Ashwinlingesh Sangeetha Ravichand — Industry Divide
-
-**Scope.** Compare AI adoption by NACE sector and year, with country and sector controls and a ranking for the selected year.
-
-**Outcome.** The page combines a heatmap of sectors by year with a ranked comparison. It uses distinct sectors, leaves missing heatmap cells blank and displays a message when all sectors are deselected. [Page](../pages/4_Industry_Divide.py) · [CSV](../data/processed/03_industry_adoption.csv)
-
-**Verification.** The project smoke test checks the empty selection message. To check chart values, match a heatmap cell and a ranking bar to the CSV using country, sector and year. [Smoke tests](../tests/test_page_smoke.py)
-
-## Le Hung Thanh — Adoption Barriers
-
-**Scope and documented Codex request.** Allow `barriers(size=None)` to retain all size classes for comparisons. Keep `GE10` as the main ranking default and preserve `PC_ENT_AI_EC`, which uses enterprises that considered AI but did not adopt it as the denominator. Preserve the filters and add regression coverage.
-
-**Outcome.** The page ranks reported barriers and compares the 10–49 and 250+ employee groups. It also compares a selected country with the supplied EU27 aggregate. It reports source rates and differences in percentage points and preserves missing values and source flags. [Page](../pages/5_Adoption_Barriers.py) · [Comparison logic](../src/barrier_comparisons.py) · [CSV](../data/processed/04_ai_adoption_barriers.csv)
-
-**Verification.** Project tests cover the default size, denominator, size selection, comparison gaps and source flags. To spot-check a gap against the CSV, match the observations by barrier, year and denominator, then subtract the source rates in the order shown. For a country-to-EU27 comparison, also match the enterprise size. [Smoke tests](../tests/test_page_smoke.py) · [Data tests](../tests/test_data.py) · [Comparison tests](../tests/test_barrier_comparisons.py)
-
-## Criterion 28
-
-Individual AI use records and personal verification details remain open. The linked tests document checks of the shared application.
+The test suite exercises the page workflows and data calculations: [`tests/test_page_smoke.py`](../tests/test_page_smoke.py), [`tests/test_data.py`](../tests/test_data.py), and [`tests/test_barrier_comparisons.py`](../tests/test_barrier_comparisons.py). Regenerating the processed CSVs reproduced their committed SHA-256 hashes, and source validation passed with a documented Eurostat publication-vintage warning. See [`scripts/validate_data.py`](../scripts/validate_data.py) and [`docs/reproducibility.md`](reproducibility.md).

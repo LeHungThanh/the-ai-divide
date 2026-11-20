@@ -1,8 +1,8 @@
 # Member pages and design decisions
 
-The names below identify the group's assigned page workstreams. The design decisions describe the shared implementation, not independently verified individual labor. Individual AI use and personal checks remain unverified as explained in [the AI provenance matrix](ai_provenance_matrix.md).
+The table below records each member's page workstream and its design decision. Corresponding AI-use records, including reconstructed requests and falsifiable verification checks, are in the [AI provenance matrix](ai_provenance_matrix.md).
 
-| Assigned member | Page | Design decision | Source dataset |
+| Member | Page | Design decision | Source dataset |
 |---|---|---|---|
 | Mehul Joshi | Country Divide | Rank national observations separately from the Eurostat EU benchmark; permit a selected-country trend. | `01_country_adoption.csv` |
 | Yixin Huang | Company Size | Compare only nonoverlapping small, medium and large classes and show a percentage-point gap. | `02_company_size.csv` |
