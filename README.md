@@ -57,7 +57,7 @@ python scripts/validate_data.py
 python -m unittest discover -s tests -v
 ```
 
-See the [30-check rubric audit](docs/rubric_audit.md), [startup/performance review](docs/performance_review.md), [full data dictionary](docs/data_dictionary.md), [source and licence notes](docs/data_sources.md), [reproducibility guide](docs/reproducibility.md), [accessibility review](docs/accessibility_review.md), and [team AI provenance matrix](docs/ai_provenance_matrix.md) for evidence and outstanding items. The preparation script writes the same four CSVs; its current output is verified byte-for-byte against the checked-in files.
+See the [startup/performance review](docs/performance_review.md), [full data dictionary](docs/data_dictionary.md), [source and licence notes](docs/data_sources.md), [reproducibility guide](docs/reproducibility.md), [accessibility review](docs/accessibility_review.md), and [team AI provenance matrix](docs/ai_provenance_matrix.md) for evidence and outstanding items. The preparation script writes the same four CSVs; its current output is verified byte-for-byte against the checked-in files.
 
 The app has Overview, four member pages, and Conclusion & Sources. Member pages include source-trace expanders, denominator labels, quality flags, and working filters. Charts omit missing values; the UI never replaces them with zero. Files are read locally at runtime.
 
