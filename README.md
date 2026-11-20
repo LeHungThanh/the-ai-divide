@@ -1,12 +1,14 @@
 # The AI Divide: Who Is Being Left Behind?
 
+**Live dashboard:** [the-ai-divide-sibscn8eceqt5wl6nrpwpt.streamlit.app](https://the-ai-divide-sibscn8eceqt5wl6nrpwpt.streamlit.app/)
+
 **Research question:** Is AI adoption becoming more inclusive across European businesses, or is a digital divide emerging?
 
 **Audience and persona:** EU policymakers who decide where to target digital-skills, SME and AI-adoption support, and need comparable evidence about countries, enterprise sizes, industries and reported barriers.
 
-The six-page Streamlit dashboard presents the question and evidence for that policy decision. It is arguable: adoption can rise overall while country, size and industry gaps persist, so the same descriptive data can support different assessments of inclusion.
+This six-page Streamlit data narrative brings together Eurostat evidence on overall EU adoption, country differences, enterprise size, industry, and reported non-adoption barriers. The question is arguable: adoption can rise overall while country, size, and industry gaps persist, so the same descriptive data can support different assessments of inclusion.
 
-The group workstreams are Country Divide (Mehul Joshi), Company Size (Yixin Huang), Industry Divide (Ashwinlingesh Sangeetha Ravichand) and Adoption Barriers (Le Hung Thanh). See the [member contributions](docs/member_contributions.md) and [AI provenance matrix](docs/ai_provenance_matrix.md) for the implementation and AI-use records.
+The group workstreams are Country Divide (Mehul Joshi), Company Size (Yixin Huang), Industry Divide (Ashwinlingesh Sangeetha Ravichand), and Adoption Barriers (Le Hung Thanh). See [member contributions](docs/member_contributions.md) for assigned responsibilities and the [AI provenance matrix](docs/ai_provenance_matrix.md) for reconstructed AI-use records and project-level verification evidence.
 
 ## Run locally
 
@@ -40,11 +42,22 @@ On Windows, activate with `.venv\Scripts\activate`. Then open the URL printed by
 
 Each workflow was checked against the page's controls, source data selection and chart construction. Automated checks are listed in [the data validation report](docs/data_validation_report.md) and [reproducibility instructions](docs/reproducibility.md).
 
-## Deploy
+## Deployment
 
-Publish the `main` branch after the group's own review, then create a Streamlit Community Cloud app with **entry point `app.py`** and **Python 3.12** in Advanced settings. The host installs the root `requirements.txt`. Keep the four CSVs under `data/processed/` in the deployed repository. Other hosts can use `python -m streamlit run app.py --server.address 0.0.0.0 --server.port $PORT` with a supplied `PORT` environment variable. No secrets or API credentials are required.
+The published application is hosted on [Streamlit Community Cloud](https://the-ai-divide-sibscn8eceqt5wl6nrpwpt.streamlit.app/) with `app.py` as its entry point. It reads the four bundled processed CSV files at runtime and requires no secrets or external API calls.
 
-## Verify
+## Data, methods and documentation
+
+The application uses bundled Eurostat JSON-stat source snapshots and processed CSV files. The data covers 2021, 2023, 2024, and 2025; 2022 is unavailable. The 2025 EU expertise-barrier observation is 70.31% in the bundled June 2026 source snapshot, compared with 70.89% in a December 2025 Eurostat article; this documented source-vintage difference is not adjusted in the app.
+
+Supporting material:
+
+- [Data dictionary](docs/data_dictionary.md) and [source and licence notes](docs/data_sources.md)
+- [Reproducibility guide](docs/reproducibility.md) and [data validation report](docs/data_validation_report.md)
+- [Accessibility review](docs/accessibility_review.md) and [performance review](docs/performance_review.md)
+- [AI disclosure](docs/ai_usage.md) and [AI provenance matrix](docs/ai_provenance_matrix.md)
+
+## Reproduce and verify
 
 ```sh
 python -m unittest discover -s tests -v
@@ -59,8 +72,4 @@ python scripts/validate_data.py
 python -m unittest discover -s tests -v
 ```
 
-See the [startup/performance review](docs/performance_review.md), [full data dictionary](docs/data_dictionary.md), [source and licence notes](docs/data_sources.md), [reproducibility guide](docs/reproducibility.md), [accessibility review](docs/accessibility_review.md), and [team AI provenance matrix](docs/ai_provenance_matrix.md) for evidence and outstanding items. The preparation script writes the same four CSVs; its current output is verified byte-for-byte against the checked-in files.
-
-The app has Overview, four member pages, and Conclusion & Sources. Member pages include source-trace expanders, denominator labels, quality flags, and working filters. Charts omit missing values; the UI never replaces them with zero. Files are read locally at runtime.
-
-The data covers 2021, 2023, 2024 and 2025; 2022 is unavailable. The original source package supplied with the project is not bundled as a duplicate ZIP; the repository instead includes the two raw Eurostat cubes, manifest and scripts directly. The 2025 EU expertise-barrier observation is 70.31% in the June 2026 source snapshot, compared with 70.89% in Eurostat's December 2025 article. The value is preserved and the publication-vintage discrepancy is documented. See [data sources](docs/data_sources.md), [member page decisions](docs/member_contributions.md), and [AI disclosure](docs/ai_usage.md).
+The preparation script writes the same four processed files and the reproducibility checks compare them byte-for-byte with the checked-in versions. Charts retain missing observations as missing; they are never treated as zero.

@@ -1,6 +1,6 @@
-# Member pages and design decisions
+# Assigned workstreams and design decisions
 
-The table below records each member's page workstream and its design decision. Corresponding AI-use records, including reconstructed requests and falsifiable verification checks, are in the [AI provenance matrix](ai_provenance_matrix.md).
+This table records the group's assigned page responsibilities and design decisions. It is not an independently verified record of individual authorship or contribution. The [AI provenance matrix](ai_provenance_matrix.md) separately records reconstructed AI-use summaries and project-level verification procedures.
 
 | Member | Page | Design decision | Source dataset |
 |---|---|---|---|
@@ -9,4 +9,4 @@ The table below records each member's page workstream and its design decision. C
 | Ashwinlingesh Sangeetha Ravichand | Industry Divide | Use a distinct NACE comparison partition and show both a year-by-sector heatmap and ranking. | `03_industry_adoption.csv` |
 | Le Hung Thanh | Adoption Barriers | Keep the `PC_ENT_AI_EC` conditional denominator and multi-response explanation; compare the disjoint `10-49` and `GE250` classes and each Member State with Eurostat's supplied EU27 aggregate using signed percentage-point gaps. | `04_ai_adoption_barriers.csv` |
 
-The Overview and Conclusion & Sources pages integrate the four workstreams. All member pages expose filters, missing/flagged-cell counts, and a source-trace expander for a displayed value. Shared design and data rules live in `src/`. The project group should review the prose and interpretation before assessment or public deployment.
+The Overview and Conclusion & Sources pages integrate the four workstreams. All member pages expose filters, missing/flagged-cell counts, and a source-trace expander for a displayed value. Shared design and data rules live in `src/`.
